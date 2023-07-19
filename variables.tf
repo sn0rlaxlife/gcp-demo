@@ -1,7 +1,3 @@
-variable "project_id" {
-  type        = string
-  description = "The project ID to host the cluster in (required)"
-}
 
 variable "name" {
   type        = string
@@ -114,16 +110,6 @@ variable "maintenance_recurrence" {
   type        = string
   description = "Frequency of the recurring maintenance window in RFC5545 format."
   default     = ""
-}
-
-variable "ip_range_pods" {
-  type        = string
-  description = "The _name_ of the secondary subnet ip range to use for pods"
-}
-
-variable "ip_range_services" {
-  type        = string
-  description = "The _name_ of the secondary subnet range to use for services"
 }
 
 variable "node_pools" {
@@ -582,4 +568,40 @@ variable "enable_kubernetes_alpha" {
   type        = bool
   description = "Whether to enable Kubernetes Alpha features for this cluster. Note that when this option is enabled, the cluster cannot be upgraded and will be automatically deleted after 30 days."
   default     = false
+}
+
+variable "node_pools_name" {
+    type        = string
+    description = "The name of the node pool"
+    default     = "default-node-pool"
+}
+
+variable "node_pools_machine_type" {
+    type        = string
+    description = "The machine type to create for the node pool"
+    default     = "e2-medium"
+}
+
+variable "node_pools_min_count" {
+    type        = number
+    description = "The minimum number of nodes to create in this node pool"
+    default     = 1
+}
+
+variable "node_pools_max_count" {
+    type        = number
+    description = "The maximum number of nodes to create in this node pool"
+    default     = 1
+}
+
+variable "node_pools_local_ssd_count" {
+    type        = number
+    description = "The number of local SSD disks to attach to each node"
+    default     = 0
+}
+
+variable "node_pools_preemptible" {
+    type        = bool
+    description = "Whether to create a preemptible node pool"
+    default     = false
 }
