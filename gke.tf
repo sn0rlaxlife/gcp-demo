@@ -12,24 +12,21 @@ resource "google_container_cluster" "gke-cluster" {
   location = "us-central1"
   remove_default_node_pool = true
   initial_node_count = 1
-  metadata = {
-    disable-legacy-endpoints = "true"
-  }
-
   network = google_compute_network.vpc_network.id
-  pod_security_policy_config {
+  metadata = false
+  network_policy {
     enabled = true
+    provider = "CALICO"
   }
   subnetwork = google_compute_subnetwork.network.id
   
-  labels = {
-    developer = "deveng"
-  }
   ip_allocation_policy {
     cluster_secondary_range_name = "tf-subnet-range-2"
     services_secondary_range_name = google_compute_subnetwork.network.secondary_ip_range.0.range_name
   }
-
+  labels = {
+    developer = "deveng"
+  }
   
 }
 
