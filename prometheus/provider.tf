@@ -16,19 +16,5 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "2.22.0"
     }
-
-   provider "google" {
-  # Configuration options
-   }
-   
-   provider "kubectl" {
-     config_path = "~/.kube/config"
-   }
-
-  provider "helm" {
-    kubernetes {
-      config_path = "~/.kube/config"
-    }
-   }
 }
 }
