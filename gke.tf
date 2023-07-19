@@ -13,7 +13,6 @@ resource "google_container_cluster" "gke-cluster" {
   remove_default_node_pool = true
   initial_node_count = 1
   network = google_compute_network.vpc_network.id
-  metadata = false
   network_policy {
     enabled = true
     provider = "CALICO"
@@ -24,10 +23,11 @@ resource "google_container_cluster" "gke-cluster" {
     cluster_secondary_range_name = "tf-subnet-range-2"
     services_secondary_range_name = google_compute_subnetwork.network.secondary_ip_range.0.range_name
   }
-  labels = {
-    developer = "deveng"
-  }
-  
+}
+
+timeouts {
+  create = "30m"
+  update = "40m"
 }
 
 
